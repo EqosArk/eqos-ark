@@ -1,0 +1,394 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Courier+Prime:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ══════════════════════════════════════════════════════════
+   EQOS ark — Official Brand System
+   Source: EQOS Brand Guidelines PDF + Company Introduction deck
+══════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Official brand colors ── */
+  --navy:          #191e2e;   /* PRIMARY — headlines, body copy, main color */
+  --blue:          #436eb3;   /* PRIMARY — backgrounds, accents, subheads */
+  --amber:         #b15d00;   /* SECONDARY — subheads (Courier), CTAs, links, accents */
+  --linen:         #ded8cd;   /* SECONDARY — backgrounds & accents */
+  --white:         #ffffff;
+  --off-white:     #f8f7f4;
+
+  /* ── Derived tones ── */
+  --navy-card:     #222840;   /* card bg on dark slides */
+  --navy-light:    #2a3150;   /* hover state on dark */
+  --blue-light:    #d6e2f5;   /* tinted blue bg */
+  --amber-light:   #f5e8d6;   /* tinted amber bg */
+  --linen-dark:    #cdc7ba;   /* dividers on linen bg */
+  --text-on-dark:  rgba(255,255,255,0.88);
+  --text-muted-dark: rgba(255,255,255,0.55);
+  --text-faint-dark: rgba(255,255,255,0.35);
+
+  /* ── Typography — exactly as in deck ── */
+  --font-display: 'Playfair Display', Georgia, serif;  /* Headlines */
+  --font-body:    'Lato', system-ui, sans-serif;        /* Body copy — brand spec: Lato Light */
+  --font-courier: 'Courier Prime', 'Courier New', monospace; /* Subhead labels, accents */
+
+  /* ── Radii ── */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+
+  /* ── Shadows ── */
+  --shadow-card: 0 1px 4px rgba(25,30,46,0.10), 0 4px 16px rgba(25,30,46,0.07);
+  --shadow-lift: 0 4px 20px rgba(25,30,46,0.15);
+
+  /* ── Motion ── */
+  --transition: 160ms ease;
+
+  /* Tailwind bridge */
+  /* Tailwind bridge — linen page bg (light mode) */
+  --background:   37 22% 83%;
+  --foreground:   227 30% 14%;
+  --card:         0 0% 100%;
+  --card-foreground: 227 30% 14%;
+  --popover:      0 0% 100%;
+  --popover-foreground: 227 30% 14%;
+  --primary:      217 44% 48%;
+  --primary-foreground: 0 0% 100%;
+  --secondary:    30 100% 35%;
+  --secondary-foreground: 0 0% 100%;
+  --muted:        37 15% 88%;
+  --muted-foreground: 227 10% 42%;
+  --accent:       30 100% 35%;
+  --accent-foreground: 0 0% 100%;
+  --destructive:  0 64% 40%;
+  --destructive-foreground: 0 0% 100%;
+  --border:       37 10% 77%;
+  --input:        37 10% 77%;
+  --ring:         217 44% 48%;
+  --radius: 0.5rem;
+}
+
+/* ── Base reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--navy);
+  background: var(--linen);
+  min-height: 100dvh;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+  color: var(--navy);
+}
+
+/* ══════════════════════════════════════════════════════════
+   SITE HEADER — dark navy bar, exact deck treatment
+══════════════════════════════════════════════════════════ */
+.site-header {
+  background: var(--navy);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: 0.875rem clamp(1rem, 3vw, 2rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+/* Logo */
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  color: var(--white);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.logo-wrap svg { width: 28px; height: 28px; flex-shrink: 0; }
+
+/* Nav links */
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.site-nav a {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--text-muted-dark);
+  text-decoration: none;
+  transition: color var(--transition);
+  font-weight: 400;
+}
+.site-nav a:hover { color: var(--white); }
+.site-nav a.active { color: var(--white); font-weight: 500; }
+
+/* Header right */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.role-badge {
+  font-family: var(--font-courier);
+  font-size: 0.6875rem;
+  color: var(--text-muted-dark);
+  padding: 0.25rem 0.625rem;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 2px;
+  letter-spacing: 0.04em;
+}
+
+.icon-btn {
+  width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted-dark);
+  border-radius: var(--radius-sm);
+  cursor: pointer; border: none; background: none;
+  transition: color var(--transition), background var(--transition);
+}
+.icon-btn:hover { color: var(--white); background: rgba(255,255,255,0.08); }
+
+.avatar {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════════════════════════
+   PAGE LAYOUT
+══════════════════════════════════════════════════════════ */
+.page-wrap {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: 2.5rem clamp(1rem, 3vw, 2rem);
+}
+
+/* ══════════════════════════════════════════════════════════
+   SECTION LABEL — Courier font, amber color (exact deck)
+══════════════════════════════════════════════════════════ */
+.section-label {
+  font-family: var(--font-courier);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.section-label-light {
+  font-family: var(--font-courier);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 0.5rem;
+  display: block;
+  opacity: 0.9;
+}
+
+/* ══════════════════════════════════════════════════════════
+   CARDS — white cards with colored top accent bar (deck style)
+══════════════════════════════════════════════════════════ */
+.card {
+  background: var(--white);
+  border: 1px solid rgba(25,30,46,0.10);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.card-blue-top  { border-top: 3px solid var(--blue); }
+.card-amber-top { border-top: 3px solid var(--amber); }
+.card-navy-top  { border-top: 3px solid var(--navy); }
+
+.card-body { padding: 1.25rem 1.5rem; }
+
+/* Dark card (navy bg) — matches dark slides */
+.card-dark {
+  background: var(--navy-card);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: var(--radius-lg);
+}
+
+/* ══════════════════════════════════════════════════════════
+   BUTTONS — amber for CTAs (deck rule)
+══════════════════════════════════════════════════════════ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 1.125rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+  white-space: nowrap;
+  line-height: 1;
+}
+.btn-amber {
+  background: var(--amber);
+  color: var(--white);
+}
+.btn-amber:hover { background: #944d00; box-shadow: var(--shadow-card); }
+
+.btn-blue {
+  background: var(--blue);
+  color: var(--white);
+}
+.btn-blue:hover { background: #3560a0; }
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid rgba(25,30,46,0.20);
+  color: var(--navy);
+}
+.btn-outline:hover { border-color: var(--navy); }
+
+.btn-outline-light {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.20);
+  color: var(--white);
+}
+.btn-outline-light:hover { border-color: rgba(255,255,255,0.5); }
+
+.btn-sm { padding: 0.375rem 0.75rem; font-size: 0.75rem; }
+
+/* ══════════════════════════════════════════════════════════
+   STATUS BADGES
+══════════════════════════════════════════════════════════ */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 2px;
+  font-family: var(--font-courier);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.badge-stable    { background: #d6e2f5; color: var(--blue); }
+.badge-monitor   { background: var(--amber-light); color: var(--amber); }
+.badge-warning   { background: #fde8d6; color: #8b3a00; }
+.badge-cleared   { background: #d6e2f5; color: var(--blue); }
+
+/* ══════════════════════════════════════════════════════════
+   RECORD TYPE BADGES
+══════════════════════════════════════════════════════════ */
+.type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
+  font-family: var(--font-courier);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid;
+}
+.type-lab      { background: #dbeafe; border-color: #93c5fd; color: #1d4ed8; }
+.type-imaging  { background: var(--linen); border-color: var(--linen-dark); color: var(--navy); }
+.type-vet_note { background: var(--amber-light); border-color: #e8c89a; color: var(--amber); }
+.type-routine  { background: #d6e2f5; border-color: #9eb8e0; color: var(--blue); }
+
+/* ══════════════════════════════════════════════════════════
+   ACCESS TAGS
+══════════════════════════════════════════════════════════ */
+.access-tag {
+  font-family: var(--font-courier);
+  font-size: 0.5625rem;
+  letter-spacing: 0.06em;
+  padding: 0.125rem 0.375rem;
+  border-radius: 2px;
+  border: 1px solid;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.access-rw  { background: #d6e2f5; border-color: #9eb8e0; color: var(--blue); }
+.access-ra  { background: var(--amber-light); border-color: #e8c89a; color: var(--amber); }
+.access-r   { background: var(--linen); border-color: var(--linen-dark); color: #6b6660; }
+
+/* ══════════════════════════════════════════════════════════
+   HORSE PHOTOS
+══════════════════════════════════════════════════════════ */
+.horse-photo-sm {
+  width: 100%;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+}
+
+.horse-photo-hero {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+/* ══════════════════════════════════════════════════════════
+   DIVIDERS
+══════════════════════════════════════════════════════════ */
+.divider { border: none; border-top: 1px solid rgba(25,30,46,0.10); margin: 1.25rem 0; }
+.divider-light { border: none; border-top: 1px solid rgba(255,255,255,0.10); margin: 1.25rem 0; }
+
+/* ══════════════════════════════════════════════════════════
+   TIMELINE
+══════════════════════════════════════════════════════════ */
+.tl-dot-primary {
+  width: 12px; height: 12px; border-radius: 50%;
+  border: 2px solid var(--blue); background: var(--linen);
+  flex-shrink: 0; margin-top: 3px;
+}
+.tl-dot-secondary {
+  width: 12px; height: 12px; border-radius: 50%;
+  border: 2px solid var(--linen-dark); background: var(--linen);
+  flex-shrink: 0; margin-top: 3px;
+}
+
+/* ══════════════════════════════════════════════════════════
+   SLIDE-OVER ANIMATION
+══════════════════════════════════════════════════════════ */
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
